@@ -27,7 +27,7 @@ const player = (name, mark) => {
 const Game = (function () {
     const coinToss= () => {
         console.log("Flipping a coin to decide who starts...");
-        return Math.random() < 0.5 ? "Player 1" : "Player 2";
+        return Math.random() < 0.5 ? player1 : player2;
     }
 
     let currentPlayer = coinToss();
@@ -65,6 +65,8 @@ const Game = (function () {
     const playRound = (index) => {
         if (Gameboard.getBoard()[index] === "") {
             Gameboard.setMark(index, currentPlayer.getMark());
+            console.log(`Board: ${Gameboard.getBoard()[0]} ${Gameboard.getBoard()[1]} ${Gameboard.getBoard()[2]}\n       ${Gameboard.getBoard()[3]} ${Gameboard.getBoard()[4]} ${Gameboard.getBoard()[5]}\n       ${Gameboard.getBoard()[6]} ${Gameboard.getBoard()[7]} ${Gameboard.getBoard()[8]}`);
+            
             round++;
             checkWin();
             if (Gameboard.gameOver().getGameOver()) {
