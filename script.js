@@ -51,14 +51,19 @@ const Game = (function () {
         currentPlayer = currentPlayer === player1 ? player2 : player1;
     }
     
-    const checkWin = () => {
+    const checkWin = (winningCombinations) => {
+        console.log("Checking for a win...");
         for (const combination of winningCombinations) {
             //deconstructs the combination array into a, b, c to check separately
             const [a, b, c] = combination;
+            console.log(`Checking ${a}, ${b}, and ${c} which are ${Gameboard.getBoard()[a]}, ${Gameboard.getBoard()[b]}, and ${Gameboard.getBoard()[c]} `)
             if (Gameboard.getBoard()[a] && Gameboard.getBoard()[a] === Gameboard.getBoard()[b] && Gameboard.getBoard()[a] === Gameboard.getBoard()[c]) {
-                return Gameboard.gameOver(true);
+                console.log("Winning combo detected!");
+                console.log(`gameOver before setting: ${Gameboard.gameOver().getGameOver()}`);
+                return Gameboard.gameOver().setGameOver(true);
             }
         }
+        
         return;
     }
 
@@ -68,8 +73,9 @@ const Game = (function () {
             console.log(`Board: ${Gameboard.getBoard()[0]} ${Gameboard.getBoard()[1]} ${Gameboard.getBoard()[2]}\n       ${Gameboard.getBoard()[3]} ${Gameboard.getBoard()[4]} ${Gameboard.getBoard()[5]}\n       ${Gameboard.getBoard()[6]} ${Gameboard.getBoard()[7]} ${Gameboard.getBoard()[8]}`);
             
             round++;
-            checkWin();
-            if (Gameboard.gameOver().getGameOver()) {
+            checkWin(winningCombinations);
+            console.log(`isGameOver is ${Gameboard.isGameOver}`);
+            if (Gameboard.isGameOver) {
                 console.log(`${currentPlayer.getName()} wins!`);
                 return true;
             } else if (round === 9) {
@@ -86,7 +92,8 @@ const Game = (function () {
     }
 
     const playGame = () => {
-        Gameboard.gameOver().setGameOver(false);
+        game.gameOver().setGameOver(false);
+        console.log(`Gameboard.gameOver().getGameOver() is ${game.gameOver().getGameOver()}`);
         while (!Gameboard.gameOver().getGameOver() && round < 9) {
             const index = parseInt(prompt(`${currentPlayer}'s turn. Enter a cell index (0-8):`), 10);
             playRound(index);
