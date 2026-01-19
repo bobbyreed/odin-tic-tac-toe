@@ -11,11 +11,12 @@ const Gameboard = (function () {
         const setGameOver = (value) => { isGameOver = value;
     }
         return { getGameOver, setGameOver };
+}
     const reset = () => { board.fill(""); }
     
 
-    return { getBoard, setMark, reset, coinToss };
-}})();
+    return { getBoard, setMark, reset, gameOver};
+})();
 
 const player = (name, mark) => {
     const getName = () => name;
@@ -26,7 +27,7 @@ const player = (name, mark) => {
 const Game = (function () {
     const coinToss= () => {
         console.log("Flipping a coin to decide who starts...");
-        return Math.random() < 0.5 ? player1 : player2;
+        return Math.random() < 0.5 ? "Player 1" : "Player 2";
     }
 
     let currentPlayer = coinToss();
@@ -85,25 +86,26 @@ const Game = (function () {
     const playGame = () => {
         Gameboard.gameOver().setGameOver(false);
         while (!Gameboard.gameOver().getGameOver() && round < 9) {
-            const index = parseInt(prompt(`${currentPlayer.getName()}'s turn. Enter a cell index (0-8):`), 10);
+            const index = parseInt(prompt(`${currentPlayer}'s turn. Enter a cell index (0-8):`), 10);
             playRound(index);
         }
+    }
 
     const resetGame = () => {
         Gameboard.reset();
         round = 0;
         currentPlayer = coinToss();
     }
-    console.log(`${currentPlayer.getName()} starts first!`);
+    console.log(`${currentPlayer} starts first!`);
     
-    return { getCurrentPlayer, playRound, resetGame };
-}});
+    return { getCurrentPlayer, playRound, resetGame, playGame };
+});
 
-const player1 = player(prompt("Enter name for Player 1:"), "X");
-const player2 = player(prompt("Enter name for Player 2:"), "O");
+const player1 = player(prompt("Enter mark for Player 1:"), "X");
+const player2 = player(prompt("Enter mark for Player 2:"), "O");
 
-console.log(`${player1.getName()} is ${player1.getMark()}`);
-console.log(`${player2.getName()} is ${player2.getMark()}`);
+console.log(`Player 1 is ${player1.getMark()}`);
+console.log(`Player 2 is ${player2.getMark()}`);
 
 const game = Game();
 game.playGame();
