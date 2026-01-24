@@ -4,6 +4,7 @@ gameboard{
     border: black solid 2px;
 }
 
-gameboard div{
+.row div{
     border: grey solid 2px;
+    padding: 10px;
 }
