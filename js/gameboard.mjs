@@ -1,7 +1,18 @@
-const htmlBoard = document.querySelector('gameboard');
-
-
 const Gameboard = (function () {
+    const htmlBoard = document.querySelector('gameboard');
+
+    //create array for cells
+    const cells = [];
+    //assign cell divs to array
+    for (let index = 0; index < 9; index++) {
+        cells.push(document.getElementById(`cell${index}`));
+        cells[index].addEventListener("click", function (e) {
+            //todo: Add function call for adding mark to this cell that is current player
+            cells[index].innerText = 
+            console.log(`cell ${index} clicked`)
+        
+        });
+    }
     const board = ["", "", "", "", "", "", "", "", ""];
     const getBoard = () => board;
     const setMark = (index, mark) => {
@@ -24,3 +35,6 @@ const Gameboard = (function () {
 
     return { getBoard, setMark, reset, gameOver, isGameOver };
 })();
+
+
+
