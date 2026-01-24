@@ -1,0 +1,9 @@
+gameboard{
+    display: flex;
+    justify-content: center;
+    border: black solid 2px;
+}
+
+gameboard div{
+    border: grey solid 2px;
+}

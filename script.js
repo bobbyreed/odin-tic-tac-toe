@@ -8,14 +8,18 @@ const Gameboard = (function () {
     const isGameOver = false;
     const gameOver = (isGameOver) => {
         const getGameOver = () => isGameOver;
-        const setGameOver = (value) => { isGameOver = value;
-    }
+        const setGameOver = (value) => { 
+            console.log(`gameOver before setting: ${isGameOver}`);
+            isGameOver = value; 
+            console.log(`gameOver after setting: ${isGameOver}`);
+            console.log(`setGameOver get check = ${getGameOver.value}`);
+        }
         return { getGameOver, setGameOver };
 }
     const reset = () => { board.fill(""); }
     
 
-    return { getBoard, setMark, reset, gameOver};
+    return { getBoard, setMark, reset, gameOver, isGameOver };
 })();
 
 const player = (name, mark) => {
@@ -25,6 +29,7 @@ const player = (name, mark) => {
 }
 
 const Game = (function () {
+    Gameboard.gameOver().setGameOver(false);
     const coinToss= () => {
         console.log("Flipping a coin to decide who starts...");
         return Math.random() < 0.5 ? player1 : player2;
@@ -59,8 +64,10 @@ const Game = (function () {
             console.log(`Checking ${a}, ${b}, and ${c} which are ${Gameboard.getBoard()[a]}, ${Gameboard.getBoard()[b]}, and ${Gameboard.getBoard()[c]} `)
             if (Gameboard.getBoard()[a] && Gameboard.getBoard()[a] === Gameboard.getBoard()[b] && Gameboard.getBoard()[a] === Gameboard.getBoard()[c]) {
                 console.log("Winning combo detected!");
-                console.log(`gameOver before setting: ${Gameboard.gameOver().getGameOver()}`);
-                return Gameboard.gameOver().setGameOver(true);
+                Gameboard.gameOver().setGameOver(true);
+                console.log(`gameOver after setting: ${Gameboard.gameOver().getGameOver()}`);
+                endGame();
+                return;
             }
         }
         
@@ -92,8 +99,8 @@ const Game = (function () {
     }
 
     const playGame = () => {
-        game.gameOver().setGameOver(false);
-        console.log(`Gameboard.gameOver().getGameOver() is ${game.gameOver().getGameOver()}`);
+        Gameboard.gameOver().setGameOver(false);
+        console.log(`Gameboard.gameOver().getGameOver() is ${Gameboard.gameOver().getGameOver()}`);
         while (!Gameboard.gameOver().getGameOver() && round < 9) {
             const index = parseInt(prompt(`${currentPlayer}'s turn. Enter a cell index (0-8):`), 10);
             playRound(index);
@@ -104,6 +111,11 @@ const Game = (function () {
         Gameboard.reset();
         round = 0;
         currentPlayer = coinToss();
+    }
+
+    const endGame = (currentPlayer) => {
+        alert(`${currentPlayer} is victorious!`);
+        resetGame();
     }
     console.log(`${currentPlayer} starts first!`);
     
