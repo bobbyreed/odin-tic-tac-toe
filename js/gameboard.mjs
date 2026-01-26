@@ -1,4 +1,4 @@
-const Gameboard = (function () {
+export const Gameboard = (function () {
     const htmlBoard = document.querySelector('gameboard');
 
     //create array for cells

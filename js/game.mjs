@@ -1,6 +1,10 @@
+import { Gameboard } from "./gameboard.mjs";
+import { player1, player2 } from "./players.mjs";
+
+
+
 const Game = (function () {
     Gameboard.gameOver().setGameOver(false);
-    playerSetup();
     const coinToss= () => {
         console.log("Flipping a coin to decide who starts...");
         return Math.random() < 0.5 ? player1 : player2;
@@ -68,6 +72,7 @@ const Game = (function () {
         Gameboard.gameOver().setGameOver(false);
         console.log(`Gameboard.gameOver().getGameOver() is ${Gameboard.gameOver().getGameOver()}`);
         while (!Gameboard.gameOver().getGameOver() && round < 9) {
+            
             const index = parseInt(prompt(`${currentPlayer}'s turn. Enter a cell index (0-8):`), 10);
             playRound(index);
         }
@@ -83,9 +88,10 @@ const Game = (function () {
         alert(`${currentPlayer} is victorious!`);
         resetGame();
     }
-    console.log(`${currentPlayer} starts first!`);
+    console.log(`${currentPlayer.name} starts first!`);
     
     return { getCurrentPlayer, playRound, resetGame, playGame };
 });
 
 const game = Game();
+game.playGame();
