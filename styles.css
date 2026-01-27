@@ -1,11 +1,24 @@
 *{
-    display: block;
+    text-align: center;
+    margin: 0;
+}
+
+body{
+    border: rgb(82, 207, 82) 2px solid;
+    background-color: rgb(255, 112, 0);
 }
 gameboard{
+    background-color: rgb(255, 166, 0);
     display: flex;
     justify-content: center;
+    margin: 10px;
+    padding: 10px;
 }
-hud{
+.row div{
+    background-color: aliceblue;
+    margin: 2px;
+}
+hud div{
     display: flex;
     margin: 10px;
     padding: 10px;
@@ -15,16 +28,17 @@ hud{
     border-radius: 15px;
 }
 
+hud h2,h3{
+    text-decoration: underline;
+}
+
 .player-card{
+    border: black solid 2px;
     padding: 10px;
     margin: 10px;
     background-color: rgb(32, 206, 218);
     border-radius: 15px;
     flex-grow: 1;
-}
-
-.player-card h2{
-    text-decoration: underline;
 }
 
 .row div{
