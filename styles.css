@@ -1,7 +1,30 @@
+*{
+    display: block;
+}
 gameboard{
     display: flex;
     justify-content: center;
+}
+hud{
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    justify-content: space-around;
+    background-color: goldenrod;
     border: black solid 2px;
+    border-radius: 15px;
+}
+
+.player-card{
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(32, 206, 218);
+    border-radius: 15px;
+    flex-grow: 1;
+}
+
+.player-card h2{
+    text-decoration: underline;
 }
 
 .row div{

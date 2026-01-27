@@ -10,9 +10,6 @@ export const player1 = new Player(prompt("Enter name for Player 1:", "Player 1")
 export const player2 = new Player(prompt("Enter name for Player 2:", "Player 2"), prompt("Enter mark for Player 2:", "O"));
 
 function playerSetup(){
-    console.log(`${player1.name} will use ${player1.mark} as mark`);
-    console.log(`${player2.name} will use ${player2.mark} as mark`);
-
     const p1name = document.getElementById('p1-name');
     p1name.innerText = player1.name;
     const p1mark = document.getElementById('p1-mark');
